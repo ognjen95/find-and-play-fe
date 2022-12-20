@@ -1,6 +1,5 @@
 import React, { useCallback } from 'react';
 import GoogleMapReact from 'google-map-react';
-// import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
 import { alpha } from '@mui/material/styles';
 import { Paper, Typography, styled, useTheme } from '@mui/material';
 import { FCWithChildren } from '../../common/types';
@@ -62,7 +61,7 @@ const MapView: FCWithChildren<IProps> = ({
     >
       <GoogleMapReact
         bootstrapURLKeys={{
-          key: 'AIzaSyDD2jLDrNJxZzr0ANFdFpBa8pwnz2rGrMA',
+          key: process.env.NEXT_PUBLIC_GOOGLE_API_KEY || '',
         }}
         onGoogleApiLoaded={({ map, maps }) => console.log(map, maps)}
         defaultCenter={defaultProps.center}
