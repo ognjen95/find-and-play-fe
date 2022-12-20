@@ -36,7 +36,7 @@ const LocationSearch: FC<{ getLocation: (data: ILocation) => void }> = ({
   ...props
 }) => {
   const { ref } = usePlacesWidget({
-    apiKey: 'AIzaSyDD2jLDrNJxZzr0ANFdFpBa8pwnz2rGrMA',
+    apiKey: process.env.NEXT_PUBLIC_GOOGLE_API_KEY,
     options: {
       componentRestrictions: { country: ['srb'] },
       types: ['address'],
