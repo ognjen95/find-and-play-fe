@@ -36,7 +36,7 @@ const SearchWithFilter: FC = () => {
       {/* FILTERS */}
       <SlideInDialog
         handleClose={handleClose}
-        isOpen={isOpen}
+        open={isOpen}
         title="Filters"
         content={<Filter />}
         actions={<ActionBar />}

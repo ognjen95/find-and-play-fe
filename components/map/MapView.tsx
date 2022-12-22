@@ -62,6 +62,7 @@ const MapView: FCWithChildren<IProps> = ({
       <GoogleMapReact
         bootstrapURLKeys={{
           key: process.env.NEXT_PUBLIC_GOOGLE_API_KEY || '',
+          libraries:['places'],
         }}
         onGoogleApiLoaded={({ map, maps }) => console.log(map, maps)}
         defaultCenter={defaultProps.center}

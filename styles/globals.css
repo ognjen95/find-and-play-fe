@@ -6,3 +6,6 @@ body {
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
+div.pac-container, .pac-container, div .pac-container {
+  z-index: 99999 !important;
+}

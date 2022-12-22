@@ -40,7 +40,7 @@ const MultiSelect: FC<{
               multiple
               {...props}
               {...field}
-              input={<StyledOutlinedInput aria-label='sports'/>}
+              input={<StyledOutlinedInput aria-label="sports" />}
               renderValue={(selected: string[]) => (
                 <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
                   {selected.map((value) => (
@@ -67,7 +67,7 @@ const MultiSelect: FC<{
       />
 
       {errorMsg && (
-        <FormHelperText sx={{ alignItems: 'left' }} error>
+        <FormHelperText sx={{ alignItems: 'left', my: '.5rem' }} error>
           {errorMsg}
         </FormHelperText>
       )}

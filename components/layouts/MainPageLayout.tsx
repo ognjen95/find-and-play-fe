@@ -2,7 +2,7 @@ import React, { ReactNode } from 'react';
 import { styled } from '@mui/material/styles';
 import { FCWithChildren } from '../../common/types';
 import DefaultLayout from './DefaultLayout';
-import CreatePlayer from '../../features/Players/CreatePlayer';
+import CreatePlayer from '../../features/Events/CreateEventFeature';
 
 const LayoutWrapper = styled('div')`
   display: flex;

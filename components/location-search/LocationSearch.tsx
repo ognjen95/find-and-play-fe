@@ -1,7 +1,9 @@
-import Input from '@mui/material/Input/Input';
+import FormHelperText from '@mui/material/FormHelperText/FormHelperText';
+import Input, { InputProps } from '@mui/material/Input/Input';
 import styled from '@mui/material/styles/styled';
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import { usePlacesWidget } from 'react-google-autocomplete';
+import { Controller } from 'react-hook-form';
 
 export const StyledInput = styled(Input)`
   min-width: 400px;
@@ -31,37 +33,68 @@ export interface ILocation {
   lat: number;
 }
 
-const LocationSearch: FC<{ getLocation: (data: ILocation) => void }> = ({
+interface IProps extends InputProps {
+  getLocation: (keydata: ILocation) => void;
+  control: any;
+  name: string;
+  errorMsg?: string;
+}
+
+const LocationSearch: FC<IProps> = ({
   getLocation,
+  control,
+  name,
+  errorMsg,
   ...props
 }) => {
   const { ref } = usePlacesWidget({
-    apiKey: process.env.NEXT_PUBLIC_GOOGLE_API_KEY,
+    apiKey: process.env.NEXT_PUBLIC_GOOGLE_API_KEY ?? '',
     options: {
       componentRestrictions: { country: ['srb'] },
       types: ['address'],
     },
     onPlaceSelected: (place) => {
+      const address = place?.formatted_address ?? '';
+      const location = place?.geometry?.location;
+
+      const street = address.split(',')[0];
+      const city = address.split(',')[1];
+      const state = address.split(',')[2];
+
+      const lat = location?.lat() ?? 0;
+      const lng = location?.lng() ?? 0;
+
       getLocation({
-        city:
-          place?.formatted_address?.split(',')[0] +
-            ', ' +
-            place?.formatted_address?.split(',')[1] ?? '',
-        state: place?.formatted_address?.split(',')[2] ?? '',
-        lng: place?.geometry?.location?.lat() ?? 0,
-        lat: place?.geometry?.location?.lng() ?? 0,
+        city: street + ', ' + city,
+        state,
+        lat,
+        lng,
       });
     },
   });
 
   return (
-    <StyledInput
-      aria-label="Location"
-      name="location"
-      placeholder="Enter your city address"
-      inputRef={ref}
-      {...props}
-    />
+    <>
+      <Controller
+        control={control}
+        name={name}
+        render={({ field }) => (
+          <StyledInput
+            // value={location}
+            // onChange={() => {
+            //   field.onChange(location);
+            // }}
+            aria-label="Location"
+            name="location"
+            placeholder="Enter your city address"
+            {...props}
+            inputRef={ref}
+          />
+        )}
+      />
+
+      <FormHelperText error>{errorMsg}</FormHelperText>
+    </>
   );
 };
 

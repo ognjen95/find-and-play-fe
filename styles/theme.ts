@@ -42,6 +42,15 @@ declare module '@mui/material/styles' {
 }
 
 export const theme = createTheme({
+  components: {
+    MuiCssBaseline: {
+      // styleOverrides: `
+      //     .pac-container {
+      //       z-index: 99999 !important;
+      //     }
+      //   `,
+    },
+  },
   navHeight: 96,
 
   palette: {

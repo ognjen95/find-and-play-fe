@@ -20,7 +20,8 @@ interface IFields {
     | 'email'
     | 'password'
     | 'confirmPassword'
-    | 'sports';
+    | 'sports'
+    | 'location';
   label: string;
   type?: string;
   component?: JSX.Element;
@@ -28,7 +29,7 @@ interface IFields {
 }
 [];
 
-const FormWrapper = styled('div')`
+export const FormWrapper = styled('div')`
   border-radius: 20px;
   padding: 2rem 3rem;
   background-color: ${({ theme }) => theme.palette.secondary.main};
@@ -50,16 +51,9 @@ interface IProps {
   error: any;
   loading: boolean;
   onSubmit: SubmitHandler<IRegisterFormModel>;
-  handleLocation: (location: ILocation) => void;
 }
 
-const RegisterUserForm: FC<IProps> = ({
-  form,
-  onSubmit,
-  error,
-  loading,
-  handleLocation,
-}) => {
+const RegisterUserForm: FC<IProps> = ({ form, onSubmit, error, loading }) => {
   const fields: IFields[] = [
     {
       name: 'firstName',
@@ -100,6 +94,22 @@ const RegisterUserForm: FC<IProps> = ({
         </div>
       ),
     },
+    {
+      name: 'location',
+      label: 'Your Location',
+      component: (
+        <>
+          <LocationSearch
+            control={form.control}
+            name="location"
+            getLocation={(data) => form.setValue('location', data)}
+            type="text"
+            fullWidth
+            errorMsg={form.formState?.errors?.location?.city?.message}
+          />
+        </>
+      ),
+    },
   ];
 
   return (
@@ -110,12 +120,11 @@ const RegisterUserForm: FC<IProps> = ({
 
           {fields.map(({ name, label, component, type }) => {
             return (
-              <>
+              <span key={name}>
                 {component ? (
                   component
                 ) : (
                   <ControlledInput
-                    key={name}
                     name={name}
                     label={label}
                     required={true}
@@ -124,11 +133,9 @@ const RegisterUserForm: FC<IProps> = ({
                     errorMsg={errors[name]?.message}
                   />
                 )}
-              </>
+              </span>
             );
           })}
-
-          <LocationSearch getLocation={handleLocation} />
 
           <FormHelperText error>{error?.message}</FormHelperText>
 

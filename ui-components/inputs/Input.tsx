@@ -1,3 +1,4 @@
+import { TextFieldProps } from '@mui/material';
 import FormHelperText from '@mui/material/FormHelperText/FormHelperText';
 import { FC, RefObject } from 'react';
 import { Controller } from 'react-hook-form';
@@ -10,9 +11,9 @@ interface IProps {
   control?: any;
   required?: boolean;
   errorMsg?: string;
-  inputRef?: RefObject<any>;
+  // inputRef?: RefObject<any>;
 }
-const ControlledInput: FC<IProps> = ({
+const ControlledInput: FC<IProps & TextFieldProps> = ({
   label,
   type,
   name,
@@ -27,19 +28,23 @@ const ControlledInput: FC<IProps> = ({
         name={name}
         control={control}
         render={({ field }) => (
-          <StyledTextField
-            label={label}
-            variant="standard"
-            {...props}
-            {...field}
-          />
+          <>
+            <StyledTextField
+              label={label}
+              variant="standard"
+              {...props}
+              {...field}
+            />
+
+            <FormHelperText error>{errorMsg}</FormHelperText>
+          </>
         )}
       />
     </>
   );
 };
 
-export const Input: FC<Omit<IProps, 'control' & 'name'>> = ({
+export const Input: FC<Omit<IProps, 'control' & 'name'> & TextFieldProps> = ({
   label,
   errorMsg,
   inputRef,

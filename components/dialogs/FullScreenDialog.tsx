@@ -153,7 +153,7 @@ const FullScreenDialog: FC<IProp> = ({ isOpen, handleClose, data }) => {
 
           <MapView
             data={[data.data]}
-            selectedData={{ ...data, component: 'map' }}
+            selectedData={null}
             height="400px"
           />
 

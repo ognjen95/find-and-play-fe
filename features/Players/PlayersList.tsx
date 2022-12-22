@@ -1,10 +1,9 @@
 import React, { FC } from 'react';
 import { IUser } from '../../common/user.types';
 import FullScreenDialog from '../../components/dialogs/FullScreenDialog';
-import SearchWithFilter from '../../components/search-bar/SearchWithFilter';
 import SideBarCard from '../../components/side-bar-cards/SideBarCard';
 import { ISelectedData } from '../../pages';
-import { SideBarList, SideBarWrapper } from './styled';
+import { SideBarList } from './styled';
 
 interface IProps {
   users: IUser[];
@@ -20,8 +19,7 @@ const PlayersList: FC<IProps> = ({
   clearSelected,
 }) => {
   return (
-    <SideBarWrapper>
-      <SearchWithFilter />
+    <>
       <SideBarList>
         {users?.map((event) => {
           const handleSetEvent = () => {
@@ -39,7 +37,7 @@ const PlayersList: FC<IProps> = ({
         handleClose={clearSelected}
         data={selectedData}
       />
-    </SideBarWrapper>
+    </>
   );
 };
 

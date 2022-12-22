@@ -16,4 +16,13 @@ export const registerValidation = yup.object().shape({
     .min(6, 'Password must be at least 6 characters')
     .required('This field is required'),
   sports: yup.array().of(yup.string()).min(1, 'Must pick at least 1 sport'),
+  location: yup
+  .object()
+  .required()
+  .shape({
+    city: yup.string().required('Location is required field'),
+    state: yup.string().required(),
+    lat: yup.number().required(),
+    lng: yup.number().required(),
+  }),
 });

@@ -3,7 +3,9 @@ import { useState } from 'react';
 import { IUser } from '../common/user.types';
 import MainPageLayout from '../components/layouts/MainPageLayout';
 import MapView from '../components/map/MapView';
+import SearchWithFilter from '../components/search-bar/SearchWithFilter';
 import PlayersList from '../features/Players/PlayersList';
+import { SideBarWrapper } from '../features/Players/styled';
 import useGetManyUsers from '../graphql/services/hooks/users/queries/useGetManyUsers';
 
 interface IProps {}
@@ -28,12 +30,16 @@ const Home: NextPage<IProps> = () => {
   return (
     <MainPageLayout
       sideBar={
-        <PlayersList
-          users={data}
-          selectedData={selectedData}
-          setSelected={handleSelectData}
-          clearSelected={handleClearData}
-        />
+        <SideBarWrapper>
+          <SearchWithFilter />
+          
+          <PlayersList
+            users={data}
+            selectedData={selectedData}
+            setSelected={handleSelectData}
+            clearSelected={handleClearData}
+          />
+        </SideBarWrapper>
       }
       main={
         <MapView

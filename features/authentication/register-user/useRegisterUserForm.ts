@@ -1,10 +1,11 @@
-import { useMemo, useRef } from 'react';
+import { useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { registerValidation } from './registerValidation';
 import { yupResolver } from '@hookform/resolvers/yup';
 import useRegisterUserMutation from '../../../graphql/services/hooks/users/mutations/useRegisterUser';
 import { useRouter } from 'next/router';
 import { ILocation } from '../../../components/location-search/LocationSearch';
+import { toast } from 'react-toastify';
 
 export interface IRegisterFormModel {
   firstName: string;
@@ -13,6 +14,7 @@ export interface IRegisterFormModel {
   password: string;
   confirmPassword: string;
   sports: string[];
+  location: ILocation;
 }
 
 const defaultValues: IRegisterFormModel = {
@@ -22,6 +24,12 @@ const defaultValues: IRegisterFormModel = {
   password: '',
   confirmPassword: '',
   sports: [],
+  location: {
+    city: '',
+    state: '',
+    lat: 0,
+    lng: 0,
+  },
 };
 
 const useRegisterUserForm = () => {
@@ -44,32 +52,23 @@ const useRegisterUserForm = () => {
     }
   }, [data?.createUser, push]);
 
-  const location: any = useRef({});
-
-  const handleLocation = (data: ILocation) => (location.current = data);
-
-  const onSubmit = ({
+  const onSubmit = async ({
     firstName,
     lastName,
     email,
     password,
     sports,
+    location,
   }: IRegisterFormModel) => {
     const doesPasswordMatch =
       form.watch('password')! === form.watch('confirmPassword');
-    const isLocationSelected = location?.current?.lng;
 
     if (!doesPasswordMatch) {
       form.setError('confirmPassword', { message: 'Passwords do not match' });
       return;
     }
 
-    if (!isLocationSelected) {
-      form.setError('confirmPassword', { message: 'Pick Location' });
-      return;
-    }
-    console.log('create');
-    createUser({
+    const { data } = await createUser({
       variables: {
         CreateUserInput: {
           firstName,
@@ -78,18 +77,25 @@ const useRegisterUserForm = () => {
           email,
           sports,
           password,
-          location: location.current,
+          location,
         },
       },
       onError: () => {
         return;
       },
     });
+
+    if (data) {
+      toast.success('User Registered');
+      localStorage.setItem('user', JSON.stringify(data.createUser));
+      form.reset();
+
+      push('/');
+    }
   };
 
   return {
     onSubmit,
-    handleLocation,
     form,
     error,
     loading,
