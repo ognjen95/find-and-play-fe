@@ -10,7 +10,7 @@ import MuiButton from '@mui/material/Button/Button';
 import Button from '../../ui-components/buttons/Button';
 import { Controller, SubmitHandler, UseFormReturn } from 'react-hook-form';
 import Form from '../../components/form/Form';
-import { ISearchAndFilterModel } from './SearchAndFilterFeature';
+import { ISearchAndFilterModel } from './useSearchAndFilter';
 
 interface IProps {
   placeholder: string;

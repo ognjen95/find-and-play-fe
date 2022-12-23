@@ -18,7 +18,7 @@ import Chip from '@mui/material/Chip/Chip';
 import { SPORTS } from '../../common/constants';
 import MenuItem from '@mui/material/MenuItem/MenuItem';
 import { SubmitHandler, UseFormReturn } from 'react-hook-form';
-import { ISearchAndFilterModel } from '../../features/search-and-filter/SearchAndFilterFeature';
+import { ISearchAndFilterModel } from '../../features/search-and-filter/useSearchAndFilter';
 
 const StyledAccordion = styled(Accordion)`
   margin-top: 1rem;

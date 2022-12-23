@@ -1,11 +1,8 @@
 import React, { FC } from 'react';
-import { useForm } from 'react-hook-form';
-import useDebounce from '../../hooks/useDebounce';
 import SearchWithFilterForm from './SearchAndFilterForm';
-
-export interface ISearchAndFilterModel {
-  search: string;
-}
+import useSearchAndFilter, {
+  ISearchAndFilterModel,
+} from './useSearchAndFilter';
 
 interface IProps {
   placeholder: string;
@@ -13,19 +10,7 @@ interface IProps {
 }
 
 const SearchAndFilterFeature: FC<IProps> = ({ placeholder, fetchData }) => {
-  const form = useForm<ISearchAndFilterModel>({
-    defaultValues: {
-      search: '',
-    },
-  });
-  const search = form.watch('search');
-  const onSubmit = (data: ISearchAndFilterModel) => {
-    fetchData(data);
-  };
-
-  useDebounce(() => {
-    fetchData({ search });
-  }, [search]);
+  const { form, onSubmit } = useSearchAndFilter(fetchData);
 
   return (
     <SearchWithFilterForm

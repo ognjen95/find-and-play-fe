@@ -8,10 +8,9 @@ import { SideBarWrapper } from '../features/Players/styled';
 import useGetManyEventsQuery from '../graphql/services/hooks/events/queries/useGetManyEvents';
 import useGetManyUsers from '../graphql/services/hooks/users/queries/useGetManyUsers';
 import { IEvent } from '../types/events';
-import SearchAndFilterFeature, {
-  ISearchAndFilterModel,
-} from '../features/search-and-filter/SearchAndFilterFeature';
+import SearchAndFilterFeature from '../features/search-and-filter/SearchAndFilterFeature';
 import ListTypeButtons from '../components/list-type-buttons/ListTypeButtons';
+import { ISearchAndFilterModel } from '../features/search-and-filter/useSearchAndFilter';
 
 interface IProps {}
 
