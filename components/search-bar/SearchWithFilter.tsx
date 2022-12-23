@@ -30,7 +30,7 @@ const SearchWithFilter: FC<IProps> = ({ placeholder }) => {
   return (
     <>
       {/*SEARCH  */}
-      <Search elevation={12}>
+      <Search elevation={8}>
         <StyledInputBase
           placeholder={placeholder}
           inputProps={{ 'aria-label': 'search' }}
