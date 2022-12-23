@@ -1,8 +1,8 @@
 import { gql } from '@apollo/client';
 
 const GET_MANY_USERS_QUERY = gql`
-  query getManyUsers {
-    getManyUsers{
+  query getManyUsers($QueryOptionsInput: QueryOptionsInput) {
+    getManyUsers(QueryOptionsInput: $QueryOptionsInput){
     id
     firstName
     lastName

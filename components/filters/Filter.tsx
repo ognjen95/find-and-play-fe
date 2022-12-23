@@ -8,7 +8,6 @@ import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
-import FormLabel from '@mui/material/FormLabel';
 import Checkbox from '@mui/material/Checkbox';
 import FormGroup from '@mui/material/FormGroup/FormGroup';
 import InputLabel from '@mui/material/InputLabel/InputLabel';
@@ -18,6 +17,8 @@ import Box from '@mui/material/Box/Box';
 import Chip from '@mui/material/Chip/Chip';
 import { SPORTS } from '../../common/constants';
 import MenuItem from '@mui/material/MenuItem/MenuItem';
+import { SubmitHandler, UseFormReturn } from 'react-hook-form';
+import { ISearchAndFilterModel } from '../../features/search-and-filter/SearchAndFilterFeature';
 
 const StyledAccordion = styled(Accordion)`
   margin-top: 1rem;
@@ -38,15 +39,19 @@ const StyledAccordionDetails = styled(Accordion)`
   }
 `;
 
-const Filter: FC = () => {
+interface IProps {
+  form: UseFormReturn<ISearchAndFilterModel>;
+  error?: any;
+  loading?: boolean;
+  onSubmit: SubmitHandler<ISearchAndFilterModel>;
+}
+const Filter: FC<IProps> = ({ form, onSubmit, error, loading }) => {
   const [expanded, setExpanded] = useState<string[]>([
     'eventType',
     'sports',
     'days',
     'gender',
   ]);
-
-  const [filters, setFilters] = useState({});
 
   const handleChange = (option: string) => () => {
     setExpanded((prev) => {
@@ -60,7 +65,7 @@ const Filter: FC = () => {
   };
 
   return (
-    <div>
+    <>
       <StyledAccordion
         expanded={expanded.includes('sports')}
         onChange={handleChange('sports')}
@@ -76,9 +81,9 @@ const Filter: FC = () => {
         </AccordionSummary>
         <StyledAccordionDetails>
           <FormControl sx={{ m: 1, width: '100%' }}>
-            {/* <InputLabel sx={{ color: 'white' }} id="demo-multiple-chip-label">
+            <InputLabel sx={{ color: 'white' }} id="demo-multiple-chip-label">
               Sports
-            </InputLabel> */}
+            </InputLabel>
             <Select
               labelId="demo-multiple-chip-label"
               id="demo-multiple-chip"
@@ -183,7 +188,7 @@ const Filter: FC = () => {
           </FormControl>
         </StyledAccordionDetails>
       </StyledAccordion>
-    </div>
+    </>
   );
 };
 
