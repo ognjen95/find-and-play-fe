@@ -1,6 +1,6 @@
 import { TextFieldProps } from '@mui/material';
 import FormHelperText from '@mui/material/FormHelperText/FormHelperText';
-import { FC, RefObject } from 'react';
+import { FC } from 'react';
 import { Controller } from 'react-hook-form';
 import { StyledTextField } from './styled';
 
@@ -11,7 +11,6 @@ interface IProps {
   control?: any;
   required?: boolean;
   errorMsg?: string;
-  // inputRef?: RefObject<any>;
 }
 const ControlledInput: FC<IProps & TextFieldProps> = ({
   label,
