@@ -2,7 +2,7 @@ import RegisterUserForm from './RegisterUserForm';
 import useRegisterUserForm from './useRegisterUserForm';
 
 const RegisterUserFeature = () => {
-  const { onSubmit, form, error, loading, handleLocation } = useRegisterUserForm();
+  const { onSubmit, form, error, loading } = useRegisterUserForm();
 
   return (
     <RegisterUserForm
@@ -10,7 +10,6 @@ const RegisterUserFeature = () => {
       onSubmit={onSubmit}
       error={error}
       loading={loading}
-      handleLocation={handleLocation}
     />
   );
 };
