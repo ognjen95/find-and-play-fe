@@ -15,7 +15,7 @@ export const Card = styled(Paper)<IPaper>`
   flex-direction: column;
   justify-content: space-between;
   height: 250px;
-  transition: all ease-in-out 0.4s;
+  transition: all ease-in-out 0.3s;
   color: #fafafa;
   scale: ${({ isLoaded }) => (isLoaded ? 1 : 0.5)};
   opacity: ${({ isLoaded }) => (isLoaded ? 1 : 0)};
@@ -33,7 +33,6 @@ export const Card = styled(Paper)<IPaper>`
   hr {
     margin-top: 0.5rem;
   }
-
   &:hover {
     background-color: ${({ theme }) => theme.palette.secondary.main};
   }

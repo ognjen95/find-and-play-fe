@@ -34,6 +34,7 @@ const securityHeaders = [
 ];
 
 module.exports = {
+  distDir: 'build',
   headers: () => [
     {
       source: "/:path*",

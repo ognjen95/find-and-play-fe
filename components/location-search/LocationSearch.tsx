@@ -80,14 +80,10 @@ const LocationSearch: FC<IProps> = ({
         name={name}
         render={({ field }) => (
           <StyledInput
-            // value={location}
-            // onChange={() => {
-            //   field.onChange(location);
-            // }}
+          {...props}
             aria-label="Location"
             name="location"
             placeholder="Enter your city address"
-            {...props}
             inputRef={ref}
           />
         )}

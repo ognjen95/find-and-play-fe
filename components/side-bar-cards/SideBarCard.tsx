@@ -63,7 +63,7 @@ const SideBarCard: FC<Props> = ({ data, onClick, type = 'user' }) => {
   return (
     <Card
       color="primary"
-      onMouseEnter={() => setElevation(10)}
+      onMouseEnter={() => setElevation(6)}
       onMouseLeave={() => setElevation(1)}
       elevation={elevation}
       isLoaded={isLoaded}

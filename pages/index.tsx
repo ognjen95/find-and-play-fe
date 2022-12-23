@@ -65,7 +65,10 @@ const Home: NextPage<IProps> = () => {
             }}
           >
             <Button
-              sx={{ color: 'white', borderBottomLeftRadius: '20px' }}
+              sx={{
+                color: 'white',
+                borderBottomLeftRadius: '20px',
+              }}
               color="secondary"
               fullWidth
               onClick={handleToggleList}
