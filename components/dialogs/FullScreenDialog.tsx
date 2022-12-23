@@ -18,6 +18,8 @@ import generateLocation from '../../helpers/generateLocation';
 import generateFullName from '../../helpers/generateFullName';
 import { styled } from '@mui/material/styles';
 import { ISelectedData } from '../../pages';
+import { IEvent } from '../../types';
+import { IUser } from '../../common/user.types';
 
 const StyledDialogTitle = styled(DialogTitle)`
   display: flex;
@@ -76,14 +78,8 @@ interface IProp {
 }
 
 const FullScreenDialog: FC<IProp> = ({ isOpen, handleClose, data }) => {
-  const {
-    firstName,
-    lastName,
-    location,
-    description,
-    image,
-    sports,
-  } = data?.data || {};
+  const { firstName, lastName, location, description, image, sports } =
+    (data?.data as IUser & IEvent) || {};
   if (data?.component !== 'playersList') return null;
 
   return (
@@ -152,7 +148,7 @@ const FullScreenDialog: FC<IProp> = ({ isOpen, handleClose, data }) => {
           <Divider />
 
           <MapView
-            data={[data.data]}
+            data={[data.data] as IUser[] & IEvent[]}
             selectedData={null}
             height="400px"
           />

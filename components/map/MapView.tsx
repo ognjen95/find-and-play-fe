@@ -30,7 +30,7 @@ interface IProps {
   data: IUser[] & IEvent[];
   selectedData: ISelectedData | null;
   setSelected?: (data: ISelectedData) => void;
-  clearSelected: () => void;
+  clearSelected?: () => void;
 }
 
 const MapView: FCWithChildren<IProps> = ({
