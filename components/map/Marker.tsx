@@ -1,6 +1,6 @@
 import Paper from '@mui/material/Paper/Paper';
 import styled from '@mui/material/styles/styled';
-import React, { FC } from 'react';
+import React, { FC, memo } from 'react';
 import { alpha } from '@mui/material/styles';
 import { IUser } from '../../common/user.types';
 import Typography from '@mui/material/Typography/Typography';
@@ -20,10 +20,6 @@ const Card = styled(Paper)`
   justify-content: space-between;
   transition: all ease-in-out 0.2s;
   color: #fafafa;
-
-  span {
-    background-color: ${({ theme }) => alpha(theme.palette.common.white, 0.1)};
-  }
 `;
 
 interface IProps {
@@ -46,10 +42,8 @@ const Marker: FC<IProps> = ({ markerData, lng, lat, selectedId, setUser }) => {
             {generateFullName(firstName ?? '', lastName ?? '')}
           </Typography>
           <Typography>{email}</Typography>
-          <Typography>{location?.lat}</Typography>
-          <Typography>{location?.lng}</Typography>
-          <Typography>{location?.city}</Typography>
-          <Typography>{location?.state}</Typography>
+          <Typography>{location.city}</Typography>
+          <Typography>{location .state}</Typography>
         </span>
       </Card>
     );
@@ -73,4 +67,4 @@ const Marker: FC<IProps> = ({ markerData, lng, lat, selectedId, setUser }) => {
   }
 };
 
-export default Marker;
+export default memo(Marker);

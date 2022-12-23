@@ -1,5 +1,5 @@
 import { useQuery } from '@apollo/client';
-import GET_USER_BY_ID from '../../../../queries/users/GetUserById';
+import GET_USER_BY_ID from '../../../../queries/users/GetUserByIdQuery';
 
 const useGetUserByIdQuery = (id: string) => {
   const query = useQuery(GET_USER_BY_ID, { variables: { id }, skip: !id });

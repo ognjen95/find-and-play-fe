@@ -1,13 +1,13 @@
-import React, { useCallback } from 'react';
 import GoogleMapReact from 'google-map-react';
-import { alpha } from '@mui/material/styles';
-import { Paper, Typography, styled, useTheme } from '@mui/material';
+
+import { Paper, styled, useTheme } from '@mui/material';
 import { FCWithChildren } from '../../common/types';
 import { IUser } from '../../common/user.types';
-import { SAvatar } from '../side-bar-cards/styled';
-import generateFullName from '../../helpers/generateFullName';
+
 import { ISelectedData } from '../../pages';
 import Marker from './Marker';
+import { IEvent } from '../../types';
+import { memo } from 'react';
 
 interface IMappWrapper {
   height?: string;
@@ -27,10 +27,10 @@ interface IProps {
   height?: string;
   width?: string;
   borderRadius?: boolean;
-  data: IUser[];
+  data: IUser[] & IEvent[];
   selectedData: ISelectedData | null;
   setSelected?: (data: ISelectedData) => void;
-  clearSelected?: () => void;
+  clearSelected: () => void;
 }
 
 const MapView: FCWithChildren<IProps> = ({
@@ -51,7 +51,6 @@ const MapView: FCWithChildren<IProps> = ({
   };
 
   const theme = useTheme();
-
   return (
     <MapWrapper
       elevation={16}
@@ -62,9 +61,8 @@ const MapView: FCWithChildren<IProps> = ({
       <GoogleMapReact
         bootstrapURLKeys={{
           key: process.env.NEXT_PUBLIC_GOOGLE_API_KEY || '',
-          libraries:['places'],
+          libraries: ['places'],
         }}
-        onGoogleApiLoaded={({ map, maps }) => console.log(map, maps)}
         defaultCenter={defaultProps.center}
         defaultZoom={defaultProps.zoom}
         yesIWantToUseGoogleMapApiInternals
@@ -73,9 +71,6 @@ const MapView: FCWithChildren<IProps> = ({
           backgroundColor: theme.palette.primary.main,
           clickableIcons: false,
         }}
-        // options={
-        //   backgroundColor: 'black'
-        // }
         //   onClick={() => {
         //     console.log('op');
         //   }}
@@ -94,8 +89,8 @@ const MapView: FCWithChildren<IProps> = ({
             <Marker
               key={item.id}
               markerData={item}
-              lat={item.location?.lng}
-              lng={item.location?.lat}
+              lat={item.location?.lat}
+              lng={item.location?.lng}
               setUser={setUser}
               selectedId={selectedData?.data?.id}
             />
@@ -106,4 +101,4 @@ const MapView: FCWithChildren<IProps> = ({
   );
 };
 
-export default MapView;
+export default memo(MapView);

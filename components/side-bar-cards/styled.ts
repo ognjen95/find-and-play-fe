@@ -2,8 +2,12 @@ import Avatar from '@mui/material/Avatar/Avatar';
 import Paper from '@mui/material/Paper/Paper';
 import { styled, alpha } from '@mui/material/styles';
 
-export const Card = styled(Paper)`
-  background-color: ${({ theme }) => alpha(theme.palette.common.white, 0.1)};
+interface IPaper {
+  isLoaded?: boolean;
+}
+export const Card = styled(Paper)<IPaper>`
+  background-color: ${({ theme, isLoaded }) =>
+    isLoaded ? theme.palette.primary.main : theme.palette.secondary.main};
   border-radius: 20px;
   padding: 1rem;
   margin-bottom: 1rem;
@@ -11,8 +15,10 @@ export const Card = styled(Paper)`
   flex-direction: column;
   justify-content: space-between;
   height: 250px;
-  transition: all ease-in-out 0.2s;
+  transition: all ease-in-out 0.4s;
   color: #fafafa;
+  scale: ${({ isLoaded }) => (isLoaded ? 1 : 0.5)};
+  opacity: ${({ isLoaded }) => (isLoaded ? 1 : 0)};
 
   h5 {
     font-weight: bold;
@@ -26,6 +32,10 @@ export const Card = styled(Paper)`
   }
   hr {
     margin-top: 0.5rem;
+  }
+
+  &:hover {
+    background-color: ${({ theme }) => theme.palette.secondary.main};
   }
 `;
 

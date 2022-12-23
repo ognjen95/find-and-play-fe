@@ -113,8 +113,8 @@ const NavBar = () => {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="fixed">
         <Toolbar sx={{ justifyContent: 'space-between', display: 'flex' }}>
-          <Typography variant="h6" noWrap component="div">
-            FindAndPlay
+          <Typography variant="h4" fontFamily='secondary' noWrap component="div">
+            PlayIT
           </Typography>
           {!isAuthPage && (
             <Box>

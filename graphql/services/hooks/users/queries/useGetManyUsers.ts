@@ -1,15 +1,14 @@
 import { useQuery } from '@apollo/client';
-import { IBaseApolloReturn } from '../../../../../common/types';
-import { IUser } from '../../../../../common/user.types';
-import GET_MANY_USERS_QUERY from '../../../../queries/users/GetManyUsers';
+import GET_MANY_USERS_QUERY from '../../../../queries/users/GetManyUsersQuery';
 
-const useGetManyUsers = (): IBaseApolloReturn<IUser[]> => {
-  const { data, error, loading } = useQuery(GET_MANY_USERS_QUERY);
+const useGetManyUsers = (options = {}) => {
+  const { data, error, loading, ...rest } = useQuery(GET_MANY_USERS_QUERY, options);
 
   return {
     data: data?.getManyUsers,
     error,
     loading,
+    ...rest,
   };
 };
 

@@ -1,17 +1,28 @@
-import { IconButton, Paper } from '@mui/material';
 import React, { FC } from 'react';
 import TuneIcon from '@mui/icons-material/TuneOutlined';
 import SlideInDialog from '../dialogs/SlideInDialog';
 import useToggleDialog from '../../hooks/useToggleDialog';
 import Filter from '../filters/Filter';
-import Button from '../../ui-components/buttons/Button';
 import { Search, SearchIconWrapper, StyledInputBase } from './styled';
+import Paper from '@mui/material/Paper/Paper';
+import IconButton from '@mui/material/IconButton/IconButton';
+import MuiButton from '@mui/material/Button/Button';
+import Button from '../../ui-components/buttons/Button';
 
-const SearchWithFilter: FC = () => {
+interface IProps {
+  placeholder: string;
+}
+const SearchWithFilter: FC<IProps> = ({ placeholder }) => {
   const { isOpen, handleClose, handleOpen } = useToggleDialog();
 
   const ActionBar = () => (
     <div style={{ marginBottom: '.5rem' }}>
+      <MuiButton
+        sx={{ color: 'white', marginRight: '.5rem' }}
+        onClick={handleClose}
+      >
+        Clear Filters
+      </MuiButton>
       <Button onClick={handleClose}>Filter</Button>
     </div>
   );
@@ -19,13 +30,13 @@ const SearchWithFilter: FC = () => {
   return (
     <>
       {/*SEARCH  */}
-      <Search>
+      <Search elevation={12}>
         <StyledInputBase
-          placeholder="Search for Player..."
+          placeholder={placeholder}
           inputProps={{ 'aria-label': 'search' }}
         />
         <SearchIconWrapper>
-          <Paper elevation={6} sx={{ borderRadius: '30px' }}>
+          <Paper elevation={5} sx={{ borderRadius: '30px' }}>
             <IconButton size="large" onClick={handleOpen}>
               <TuneIcon />
             </IconButton>

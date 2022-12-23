@@ -77,7 +77,7 @@ interface IProp {
 
 const FullScreenDialog: FC<IProp> = ({ isOpen, handleClose, data }) => {
   const {
-    firstName: name,
+    firstName,
     lastName,
     location,
     description,
@@ -96,7 +96,7 @@ const FullScreenDialog: FC<IProp> = ({ isOpen, handleClose, data }) => {
     >
       <StyledDialogTitle>
         <Typography sx={{ ml: 2, flex: 1 }} variant="h4" component="div">
-          {generateFullName(name ?? '', lastName ?? '')}
+          {generateFullName(firstName ?? '', lastName ?? '')}
         </Typography>
         <IconButton
           edge="start"

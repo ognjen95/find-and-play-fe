@@ -1,10 +1,12 @@
+import { ILocation } from '../components/location-search/LocationSearch';
+
 export interface IEvent {
   id: string;
   name: string;
-  location: string;
+  location: ILocation;
   description: string;
   image: string;
-  sport: string[];
+  sports: string[];
   startTime: Date;
   endTime: Date;
 }

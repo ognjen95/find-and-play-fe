@@ -1,7 +1,8 @@
+import { Paper } from "@mui/material";
 import InputBase from "@mui/material/InputBase/InputBase";
 import { alpha, styled } from "@mui/material/styles";
 
-export const Search = styled('div')`
+export const Search = styled(Paper)`
   position: relative;
   color: white;
   border-radius: 50px;

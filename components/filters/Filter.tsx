@@ -62,42 +62,6 @@ const Filter: FC = () => {
   return (
     <div>
       <StyledAccordion
-        expanded={expanded.includes('eventType')}
-        onChange={handleChange('eventType')}
-      >
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel1bh-content"
-          id="panel1bh-header"
-        >
-          <Typography sx={{ color: 'text.secondary' }}>
-            Looking for teammate, event or a club to join?
-          </Typography>
-        </AccordionSummary>
-        <StyledAccordionDetails>
-          <FormControl>
-            <RadioGroup
-              row
-              aria-labelledby="event-type"
-              name="row-radio-buttons-group-events"
-            >
-              <FormControlLabel
-                value="teammate"
-                control={<Radio checked />}
-                label="Teammate"
-              />
-              <FormControlLabel
-                value="event"
-                control={<Radio />}
-                label="Event"
-              />
-              <FormControlLabel value="club" control={<Radio />} label="Club" />
-            </RadioGroup>
-          </FormControl>
-        </StyledAccordionDetails>
-      </StyledAccordion>
-
-      <StyledAccordion
         expanded={expanded.includes('sports')}
         onChange={handleChange('sports')}
       >

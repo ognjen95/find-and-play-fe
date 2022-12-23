@@ -1,5 +1,5 @@
 import { useQuery } from '@apollo/client';
-import GET_USER_BY_EMAIL from '../../../../queries/users/GetUserByEmail';
+import GET_USER_BY_EMAIL from '../../../../queries/users/GetUserByEmailQuery';
 
 const useGetUserByEmailQuery = (email: string) => {
   const query = useQuery(GET_USER_BY_EMAIL, { variables: { email } });
