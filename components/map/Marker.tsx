@@ -1,8 +1,7 @@
 import Paper from '@mui/material/Paper/Paper';
 import styled from '@mui/material/styles/styled';
 import React, { FC, memo } from 'react';
-import { alpha } from '@mui/material/styles';
-import { IUser } from '../../common/user.types';
+import { IUser } from '../../common/types/user.types';
 import Typography from '@mui/material/Typography/Typography';
 import generateFullName from '../../helpers/generateFullName';
 import { SAvatar } from '../side-bar-cards/styled';

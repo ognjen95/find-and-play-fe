@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { Avatar, Box, Paper, styled, Typography } from '@mui/material';
 import Button from '../../../ui-components/buttons/Button';
-import { IUser } from '../../../common/user.types';
+import { IUser } from '../../../common/types/user.types';
 import generateFullName from '../../../helpers/generateFullName';
 import generateLocation from '../../../helpers/generateLocation';
 

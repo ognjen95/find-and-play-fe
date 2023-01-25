@@ -3,7 +3,7 @@ import Dialog from '@mui/material/Dialog';
 import ListItemText from '@mui/material/ListItemText';
 import ListItem from '@mui/material/ListItem';
 import List from '@mui/material/List';
-import Divider from '@mui/material/Divider';
+import Divider, { dividerClasses } from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import CloseIcon from '@mui/icons-material/Close';
@@ -18,8 +18,16 @@ import generateLocation from '../../helpers/generateLocation';
 import generateFullName from '../../helpers/generateFullName';
 import { styled } from '@mui/material/styles';
 import { ISelectedData } from '../../pages';
-import { IEvent } from '../../types';
-import { IUser } from '../../common/user.types';
+import { IEvent } from '../../common/types';
+import { IUser } from '../../common/types/user.types';
+import Tooltip from '@mui/material/Tooltip/Tooltip';
+import { SAvatar } from '../side-bar-cards/styled';
+import { useRouter } from 'next/router';
+import AvatarGroup from '@mui/material/AvatarGroup/AvatarGroup';
+import { balls } from '../side-bar-cards/SideBarCard';
+import { formatDateAndTime } from '../../helpers/formatDateAndTime';
+import SendIcon from '@mui/icons-material/Send';
+import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
 
 const StyledDialogTitle = styled(DialogTitle)`
   display: flex;
@@ -35,7 +43,7 @@ const StyledDialogActions = styled(DialogActions)`
   display: flex;
   background-color: ${({ theme }) => theme.palette.primary.main};
   height: '100px';
-  padding: 1rem;
+  padding: 1rem 1.5rem;
 `;
 
 const StyledDialogContent = styled(DialogContent)`
@@ -78,8 +86,20 @@ interface IProp {
 }
 
 const FullScreenDialog: FC<IProp> = ({ isOpen, handleClose, data }) => {
-  const { firstName, lastName, location, description, image, sports } =
-    (data?.data as IUser & IEvent) || {};
+  const {
+    name,
+    firstName,
+    lastName,
+    location,
+    description,
+    image,
+    participants,
+    sports,
+    startTime,
+    endTime,
+  } = (data?.data as IUser & IEvent) || {};
+  const { push } = useRouter();
+
   if (data?.component !== 'playersList') return null;
 
   return (
@@ -92,7 +112,7 @@ const FullScreenDialog: FC<IProp> = ({ isOpen, handleClose, data }) => {
     >
       <StyledDialogTitle>
         <Typography sx={{ ml: 2, flex: 1 }} variant="h4" component="div">
-          {generateFullName(firstName ?? '', lastName ?? '')}
+          {name ? name : generateFullName(firstName ?? '', lastName ?? '')}
         </Typography>
         <IconButton
           edge="start"
@@ -107,7 +127,7 @@ const FullScreenDialog: FC<IProp> = ({ isOpen, handleClose, data }) => {
 
       <StyledDialogContent>
         <StyledList>
-          <ListItem button>
+          <ListItem>
             <ListItemText
               primary="Location"
               secondary={generateLocation(
@@ -117,36 +137,81 @@ const FullScreenDialog: FC<IProp> = ({ isOpen, handleClose, data }) => {
             />
           </ListItem>
           <Divider />
-          <ListItem button>
-            <ListItemText
-              primary="Sports"
-              secondary={sports?.map((item) => item.toUpperCase() + ', ')}
-            />
-          </ListItem>
-          <Divider />
-          {/* {startTime && (
-            <ListItem button>
+
+          {startTime && (
+            <ListItem>
               <ListItemText
                 primary="Start Time"
-                secondary={startTime?.toDateString()}
+                secondary={formatDateAndTime(startTime)}
               />
             </ListItem>
           )}
           <Divider />
           {endTime && (
-            <ListItem button>
+            <ListItem>
               <ListItemText
-                primary="Start Time"
-                secondary={endTime?.toDateString()}
+                primary="End Time"
+                secondary={formatDateAndTime(endTime)}
               />
             </ListItem>
-          )} */}
+          )}
           <Divider />
-          <ListItem button>
-            <ListItemText primary="Description" secondary={description} />
+
+          <ListItem>
+            <div style={{ paddingRight: '1rem' }}>
+              <ListItemText primary="Sports" />
+            </div>
+
+            <AvatarGroup>
+              {sports.map((sport: string) => (
+                <Tooltip title={sport} key={sport}>
+                  <SAvatar
+                    alt={sport}
+                    src={balls[sport.toLowerCase()]}
+                    sx={{ width: 30, height: 30, cursor: 'default' }}
+                  />
+                </Tooltip>
+              ))}
+            </AvatarGroup>
           </ListItem>
           <Divider />
 
+          {!!participants?.length && (
+            <ListItem>
+              <div style={{ paddingRight: '1rem' }}>
+                <ListItemText primary="Participants" />
+              </div>
+              {participants?.map((participant) => {
+                const fullName = generateFullName(
+                  participant.firstName,
+                  participant.lastName
+                );
+
+                const pushToSpecificPage = () => {
+                  push(`/user/${participant.id}`);
+                };
+
+                return (
+                  <Tooltip title={fullName} key={fullName}>
+                    <SAvatar
+                      onClick={pushToSpecificPage}
+                      alt={fullName}
+                      src={
+                        participant.id &&
+                        `https://avatars.dicebear.com/api/avataaars/$user${participant.id}.svg?mood[]=happy`
+                      }
+                      sx={{ width: 30, height: 30, cursor: 'pointer' }}
+                    />
+                  </Tooltip>
+                );
+              })}
+            </ListItem>
+          )}
+          <Divider />
+          <ListItem>
+            <ListItemText primary="Description" secondary={description} />
+          </ListItem>
+          <Divider />
           <MapView
             data={[data.data] as IUser[] & IEvent[]}
             selectedData={null}
@@ -160,8 +225,8 @@ const FullScreenDialog: FC<IProp> = ({ isOpen, handleClose, data }) => {
       <Divider />
 
       <StyledDialogActions>
-        <Button>Message</Button>
-        <Button>Apply</Button>
+        <Button endIcon={<SendIcon fontSize="inherit" />}>Message</Button>
+        <Button endIcon={<PersonAddAlt1Icon fontSize="inherit" />}>Join</Button>
       </StyledDialogActions>
     </Dialog>
   );

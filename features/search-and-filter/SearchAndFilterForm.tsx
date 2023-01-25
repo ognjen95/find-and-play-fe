@@ -11,6 +11,7 @@ import Button from '../../ui-components/buttons/Button';
 import { Controller, SubmitHandler, UseFormReturn } from 'react-hook-form';
 import Form from '../../components/form/Form';
 import { ISearchAndFilterModel } from './useSearchAndFilter';
+import FilterAltIcon from '@mui/icons-material/FilterAlt';
 
 interface IProps {
   placeholder: string;
@@ -30,7 +31,9 @@ const SearchWithFilterForm: FC<IProps> = ({ placeholder, form, onSubmit }) => {
         >
           Clear Filters
         </MuiButton>
-        <Button type="submit">Filter</Button>
+        <Button endIcon={<FilterAltIcon />} type="submit">
+          Filter
+        </Button>
       </div>
     ),
     [handleClose]
@@ -47,6 +50,7 @@ const SearchWithFilterForm: FC<IProps> = ({ placeholder, form, onSubmit }) => {
               <>
                 <Search elevation={8}>
                   <StyledInputBase
+                    autoComplete="off"
                     placeholder={placeholder}
                     inputProps={{ 'aria-label': 'search' }}
                     {...field}

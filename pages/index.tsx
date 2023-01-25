@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import type { GetStaticProps, NextPage } from 'next';
-import { IUser } from '../common/user.types';
+import { IUser } from '../common/types/user.types';
 import MainPageLayout from '../components/layouts/MainPageLayout';
 import MapView from '../components/map/MapView';
 import PlayersList from '../features/Players/PlayersList';
 import { SideBarWrapper } from '../features/Players/styled';
 import useGetManyEventsQuery from '../graphql/services/hooks/events/queries/useGetManyEvents';
 import useGetManyUsers from '../graphql/services/hooks/users/queries/useGetManyUsers';
-import { IEvent } from '../types/events';
+import { IEvent } from '../common/types/events';
 import SearchAndFilterFeature from '../features/search-and-filter/SearchAndFilterFeature';
 import ListTypeButtons from '../components/list-type-buttons/ListTypeButtons';
 import { ISearchAndFilterModel } from '../features/search-and-filter/useSearchAndFilter';
@@ -31,6 +31,7 @@ const Home: NextPage<IProps> = () => {
   const { data: userData, refetch: refetchUserData } = useGetManyUsers({
     skip: selectedList !== listOptions.players,
   });
+
   const { data: eventData, refetch: refetchEventData } = useGetManyEventsQuery({
     skip: selectedList !== listOptions.events,
   });
@@ -55,7 +56,7 @@ const Home: NextPage<IProps> = () => {
     if (selectedList === listOptions.players) {
       refetchUserData({ QueryOptionsInput: options });
     } else {
-      // refetchEventData({ QueryOptionsInput: options });
+      refetchEventData({ QueryOptionsInput: options });
     }
   };
 

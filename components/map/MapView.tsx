@@ -2,11 +2,11 @@ import GoogleMapReact from 'google-map-react';
 
 import { Paper, styled, useTheme } from '@mui/material';
 import { FCWithChildren } from '../../common/types';
-import { IUser } from '../../common/user.types';
+import { IUser } from '../../common/types/user.types';
 
 import { ISelectedData } from '../../pages';
 import Marker from './Marker';
-import { IEvent } from '../../types';
+import { IEvent } from '../../common/types';
 import { memo } from 'react';
 
 interface IMappWrapper {

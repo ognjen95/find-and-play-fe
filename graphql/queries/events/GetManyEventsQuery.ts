@@ -1,8 +1,8 @@
 import { gql } from '@apollo/client';
 
 const GET_MANY_EVENTS_QUERY = gql`
-  query getManyEvents {
-    getManyEvents {
+  query getManyEvents($QueryOptionsInput: QueryOptionsInput) {
+    getManyEvents(QueryOptionsInput: $QueryOptionsInput) {
       id
       name
       startTime
@@ -14,6 +14,12 @@ const GET_MANY_EVENTS_QUERY = gql`
         lat
         city
         state
+      }
+      participants {
+        id
+        firstName
+        lastName
+        image
       }
     }
   }

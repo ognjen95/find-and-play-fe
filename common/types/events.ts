@@ -1,4 +1,5 @@
-import { ILocation } from '../components/location-search/LocationSearch';
+import { ILocation } from '../../components/location-search/LocationSearch';
+import { IUser } from './user.types';
 
 export interface IEvent {
   id: string;
@@ -9,4 +10,5 @@ export interface IEvent {
   sports: string[];
   startTime: Date;
   endTime: Date;
+  participants?: IUser[]
 }

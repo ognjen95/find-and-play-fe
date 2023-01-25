@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { IUser } from '../../common/user.types';
+import { IUser } from '../../common/types/user.types';
 import FullScreenDialog from '../../components/dialogs/FullScreenDialog';
 import SideBarCard from '../../components/side-bar-cards/SideBarCard';
 import { ISelectedData } from '../../pages';

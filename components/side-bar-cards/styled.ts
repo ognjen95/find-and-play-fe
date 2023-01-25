@@ -1,10 +1,11 @@
 import Avatar from '@mui/material/Avatar/Avatar';
 import Paper from '@mui/material/Paper/Paper';
-import { styled, alpha } from '@mui/material/styles';
+import { styled } from '@mui/material/styles';
 
 interface IPaper {
   isLoaded?: boolean;
 }
+
 export const Card = styled(Paper)<IPaper>`
   background-color: ${({ theme, isLoaded }) =>
     isLoaded ? theme.palette.primary.main : theme.palette.secondary.main};

@@ -33,6 +33,7 @@ const ControlledInput: FC<IProps & TextFieldProps> = ({
               variant="standard"
               {...props}
               {...field}
+              autoComplete="off"
             />
 
             <FormHelperText error>{errorMsg}</FormHelperText>
@@ -51,7 +52,12 @@ export const Input: FC<Omit<IProps, 'control' & 'name'> & TextFieldProps> = ({
 }) => {
   return (
     <>
-      <StyledTextField label={label} variant="standard" {...props} />
+      <StyledTextField
+        autoComplete="off"
+        label={label}
+        variant="standard"
+        {...props}
+      />
 
       {<FormHelperText error>{errorMsg}</FormHelperText>}
     </>

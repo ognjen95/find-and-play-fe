@@ -1,7 +1,7 @@
 import { FC, useEffect, useState } from 'react';
 
 import Button from '../../ui-components/buttons/Button';
-import { IUser } from '../../common/user.types';
+import { IUser } from '../../common/types/user.types';
 import generateFullName from '../../helpers/generateFullName';
 import { useRouter } from 'next/router';
 import {
@@ -11,7 +11,7 @@ import {
   HeaderWrapper,
   SAvatar,
 } from './styled';
-import { IEvent } from '../../types';
+import { IEvent } from '../../common/types';
 import generateLocation from '../../helpers/generateLocation';
 import { formatDateAndTime } from '../../helpers/formatDateAndTime';
 import Typography from '@mui/material/Typography/Typography';
@@ -19,6 +19,7 @@ import FormHelperText from '@mui/material/FormHelperText/FormHelperText';
 import Divider from '@mui/material/Divider/Divider';
 import AvatarGroup from '@mui/material/AvatarGroup/AvatarGroup';
 import Tooltip from '@mui/material/Tooltip/Tooltip';
+import VisibilityIcon from '@mui/icons-material/Visibility';
 
 type Props = {
   data: IUser | IEvent;
@@ -26,7 +27,7 @@ type Props = {
   onClick: () => void;
 };
 
-const balls: any = {
+export const balls: any = {
   football: '/soccer-ball.png',
   basketball: '/basketball.png',
   tennis: '/tennisball.png',
@@ -121,7 +122,12 @@ const SideBarCard: FC<Props> = ({ data, onClick, type = 'user' }) => {
             ))}
           </AvatarGroup>
         </div>
-        <Button color="primary" size="small" onClick={onClick}>
+        <Button
+          color="primary"
+          onClick={onClick}
+          size="small"
+          endIcon={<VisibilityIcon fontSize='large' />}
+        >
           View
         </Button>
       </BottomBarWrapper>
