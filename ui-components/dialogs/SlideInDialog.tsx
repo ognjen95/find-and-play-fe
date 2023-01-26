@@ -5,21 +5,21 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import Slide from '@mui/material/Slide';
 import { TransitionProps } from '@mui/material/transitions';
-import { FCWithChildren } from '../../common/types';
 import { styled } from '@mui/material/styles';
 import Typography from '@mui/material/Typography/Typography';
 import IconButton from '@mui/material/IconButton/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import useMediaQ from '../../hooks/useMediaQ';
+import { FCWithChildren } from '../../common/types/types';
 
 const StyledDialog = styled(Dialog)`
   & .MuiDialog-paper {
-    border-radius: 20px;
+    border-radius: 10px;
     background-color: ${({ theme }) => theme.palette.primary.main};
 
-    @media (max-width: ${({ theme }) => theme.breakpoints.values.md}px) {
+    /* @media (max-width: ${({ theme }) => theme.breakpoints.values.md}px) {
       border-radius: 0;
-    }
+    } */
   }
 `;
 
@@ -28,13 +28,13 @@ const StyledDialogTitle = styled(DialogTitle)`
   justify-content: space-between;
   align-items: center;
   color: ${({ theme }) => theme.palette.common.white};
-  padding: 1rem 0.5rem;
+  padding: 0.5rem;
 `;
 
 const StyledDialogActions = styled(DialogActions)`
   display: flex;
   background-color: ${({ theme }) => theme.palette.primary.main};
-  padding: 1rem;
+  padding: 1rem 1rem 1.5rem 1rem;
 `;
 
 const StyledDialogContent = styled(DialogContent)`
@@ -78,7 +78,7 @@ const SlideInDialog: FCWithChildren<IProps> = ({
   return (
     <StyledDialog
       {...props}
-      fullScreen={isSmallScreen}
+      // fullScreen={isSmallScreen}
       open={open}
       TransitionComponent={Transition}
       keepMounted
@@ -88,7 +88,7 @@ const SlideInDialog: FCWithChildren<IProps> = ({
       sx={{ borderRadius: '20px' }}
     >
       <StyledDialogTitle>
-        <Typography sx={{ ml: 2, flex: 1 }} variant="h4" component="div">
+        <Typography sx={{ ml: 2, flex: 1 }} variant="h5" component="div">
           {title}
         </Typography>
         <IconButton

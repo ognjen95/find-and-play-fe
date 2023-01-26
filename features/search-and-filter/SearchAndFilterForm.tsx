@@ -1,6 +1,6 @@
 import React, { FC, useCallback } from 'react';
 import TuneIcon from '@mui/icons-material/TuneOutlined';
-import SlideInDialog from '../../components/dialogs/SlideInDialog';
+import SlideInDialog from '../../ui-components/dialogs/SlideInDialog';
 import useToggleDialog from '../../hooks/useToggleDialog';
 import Filters from '../../components/filters/Filter';
 import { Search, SearchIconWrapper, StyledInputBase } from './styled';

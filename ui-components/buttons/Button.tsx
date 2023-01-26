@@ -3,7 +3,7 @@ import { ButtonProps, Button as MuiButton, styled } from '@mui/material';
 import { FCWithChildren } from '../../common/types/types';
 
 const StyledButton = styled(MuiButton)`
-  border-radius: 8px;
+  border-radius: 10px;
   padding: 13px 30px;
   background: ${({ theme }) => theme.palette?.gradient.main};
   font-weight: bold;

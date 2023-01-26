@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import SlideInDialog from '../../components/dialogs/SlideInDialog';
+import SlideInDialog from '../../ui-components/dialogs/SlideInDialog';
 import FloatingButton from '../../ui-components/buttons/FloatingButton';
 import CreateEventForm from './CreateEventForm';
 import useCreateEventForm from './useCreateEventForm';
