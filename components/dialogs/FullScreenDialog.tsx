@@ -62,7 +62,7 @@ const StyledDialogContent = styled(DialogContent)`
   }
 `;
 
-const StyledList = styled(List)`
+export const StyledList = styled(List)`
   background-color: ${({ theme }) => theme.palette.secondary.main};
   border-radius: 20px;
   margin: 1rem 0 0 0;
@@ -111,7 +111,7 @@ const FullScreenDialog: FC<IProp> = ({ isOpen, handleClose, data }) => {
     handleOpen: handleOpenConfirmDialog,
   } = useToggleDialog();
 
-  const [createJoinRequest, { error, loading }] = useJoinEventMutation();
+  const [createJoinRequest, { loading }] = useJoinEventMutation();
 
   if (data?.component !== 'playersList') return null;
   const loggedInUser = JSON.parse(localStorage.getItem('user') ?? '') || {};
@@ -132,10 +132,11 @@ const FullScreenDialog: FC<IProp> = ({ isOpen, handleClose, data }) => {
       try {
         await createJoinRequest({ variables: { eventId: id } });
         toast.success('Request for joining event has been sent');
-      } catch (err) {
-        toast.error(
-          error?.message ?? 'Request not sent, please try again later'
-        );
+      } catch (error) {
+        if (error instanceof Error)
+          toast.error(
+            error?.message ?? 'Request not sent, please try again later'
+          );
       } finally {
         handleCloseConfirmDialog();
       }

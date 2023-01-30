@@ -39,7 +39,8 @@ const StyledDialogActions = styled(DialogActions)`
 
 const StyledDialogContent = styled(DialogContent)`
   &.MuiDialogContent-root {
-    background-color: ${({ theme }) => theme.palette.primary.main};
+
+    margin-top: 1rem;
     ::-webkit-scrollbar {
       display: none;
     }

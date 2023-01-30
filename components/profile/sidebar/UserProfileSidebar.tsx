@@ -43,9 +43,9 @@ const SAvatar = styled(Avatar)`
 const StyledPaper = styled(Paper)`
   background-color: ${({ theme }) => theme.palette.secondary.main};
   color: white;
-  padding: 1rem;
+  padding: 0 1rem 1rem 1rem;
   margin-top: 1rem;
-  border-radius: 20px;
+  border-radius: 10px;
 `;
 
 interface IProps {
@@ -70,25 +70,28 @@ const UserProfileSidebar: FC<IProps> = ({ user }) => {
           sx={{ width: 60, height: 60 }}
         />
       </Box>
-
-      <Button size="small" fullWidth>
-        Follow
-      </Button>
-      <Button size="small" fullWidth>
-        Message
-      </Button>
+      <Box
+        sx={{ display: 'flex', justifyContent: 'space-between', gap: '1rem' }}
+      >
+        <Button fullWidth size="small">
+          Follow
+        </Button>
+        <Button fullWidth size="small">
+          Message
+        </Button>
+      </Box>
       <StyledPaper elevation={6}>
-        <Typography fontWeight="bold" variant="h4">
+        <Typography fontWeight="bold" variant="h6">
           {generateFullName(firstName, lastName)}
         </Typography>
-        <Typography variant="h6">
+        <Typography variant="body1">
           Location:{' '}
           {city && state ? generateLocation(city, state) : 'Somewhere on Earth'}
         </Typography>
-        <Typography variant="h6"> Email: {email}</Typography>
-        <Typography variant="h6"> Stamina: {stamina}</Typography>
-        <Typography variant="h6"> Reliability: {reliability}</Typography>
-        <Typography variant="h6"> Played games: 12</Typography>
+        <Typography variant="body1"> Email: {email}</Typography>
+        <Typography variant="body1"> Stamina: {stamina}</Typography>
+        <Typography variant="body1"> Reliability: {reliability}</Typography>
+        <Typography variant="body1"> Played games: 12</Typography>
       </StyledPaper>
     </SideBarWrapper>
   );

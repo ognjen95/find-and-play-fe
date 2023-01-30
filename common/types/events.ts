@@ -10,5 +10,15 @@ export interface IEvent {
   sports: string[];
   startTime: Date;
   endTime: Date;
-  participants?: IUser[]
+  participants?: IUser[];
+  eventRequests: IEventRequest[];
+}
+
+export interface IEventRequest {
+  id: string;
+  eventId: string;
+  userId: string;
+  isApproved: string;
+  requestFrom: IUser;
+  requestFor: IUser[];
 }

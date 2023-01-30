@@ -21,7 +21,7 @@ import { SubmitHandler, UseFormReturn } from 'react-hook-form';
 import { ISearchAndFilterModel } from '../../features/search-and-filter/useSearchAndFilter';
 
 const StyledAccordion = styled(Accordion)`
-  margin-top: 1rem;
+  /* margin-top: 1rem; */
   background-color: ${({ theme }) => theme.palette.secondary.main};
   p,
   span,
